@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testdeqode/Views/HomeScreen/home_screen_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,14 +28,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Container(),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(widget.title),
+        ),
+        bottomNavigationBar: Container(
+          color: Colors.blue,
+          child: const TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.home)),
+              Tab(icon: Icon(Icons.search)),
+              Tab(icon: Icon(Icons.person)),
+            ],
+          ),
+        ),
+        body: const SafeArea(
+          child: TabBarView(
+            children: [
+              HomeScreenProvider(),
+              Icon(Icons.search),
+              Icon(Icons.person),
+            ],
+          ),
+        ),
       ),
     );
   }
